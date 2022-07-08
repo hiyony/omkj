@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org" lang = "ja">
+<head>
+<meta charset="UTF-8">
+<title>Omikuji Web Service</title>
+</head>
+<body>
+	<h1>Omikuji Web Service</h1>
+	
+	<form th:object="${inputForm}" method="POST">
+		<span>お誕生日を入力してください！</span>
+		<div>
+			<input type = "text" id = "birthday" name = "birthday" th:field = "*{birthday}" placeholder = "yyyyMMddの形式"/>
+			<ul th:if="${#fields.hasErrors('birthday')}">
+				<li th:each = "e : ${#fields.detailedErrors('birthday')}" th:text="${e.message}" style = "color:red;"></li>
+			</ul>
+		</div>
+		<input type = "submit" name = "btn" value = "確認" th:action="@{/}">		
+		<br><br>
+		上にお誕生日を入力してクリックしてください！<br>
+		<input type = "submit" name = "btn" value = "過去半年の結果リスト">
+		<input type = "submit" name = "btn" value = "過去結果のおみくじ割合">
+	</form>
+</body>
+</html>

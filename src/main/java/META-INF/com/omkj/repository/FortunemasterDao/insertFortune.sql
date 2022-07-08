@@ -1,0 +1,2 @@
+INSERT INTO fortunemaster(unseiname, unseicode, renewalwriter, renewaldate, unseiwriter, unseiwritedate) 
+VALUES (/* unseiname */, /* unseicode */, /* renewalwriter */, /* renewaldate */, /* unseiwriter */, /* unseiwritedate */);
