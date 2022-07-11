@@ -6,16 +6,16 @@
 </head>
 <body>
 	<h1>今日の運勢はどうですか？</h1>
-	<p th:text = "'誕生日は' + ${inputForm.birthday} + 'です。'"></p>
-	<p th:text = "'今日の運勢は　です。'"></p>
-	<div id="list">
-		<ul>
-			<li>願い事 : </li>
-			<li>商い : </li>
-			<li>学問 : </li>
-		</ul>
+	<span th:text = "'誕生日は' + ${inputForm.birthday} + 'です。'"></span>
+	<span th:text = "'今日の運勢は「' + ${omkj} + '」です。'"></span>
+	<hr>
+	<div id = "list">
+		<span th:text = "'願い事　:　' + ${negaigoto}"></span><br>
+		<span th:text = "'商い　:　' + ${akinai}"></span><br>
+		<span th:text = "'学問　:　' + ${gakumon}"></span>
 	</div>
 	<br><input type="button"
-			   value="戻る" />
+			   value="戻る" 
+			   onclick="location.href = '/'"/>
 </body>
 </html>

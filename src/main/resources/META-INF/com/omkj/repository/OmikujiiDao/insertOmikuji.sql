@@ -1,0 +1,2 @@
+INSERT INTO omikujii(omikujicode, unseicode, negaigoto, akinai, gakumon, renewalwriter, renewaldate, unseiwriter, unseiwritedate) 
+VALUES (/* omikujii.omikujicode */'26', /* omikujii.unseicode */'2', /* omikujii.negaigoto */'叶う', /* omikujii.akinai */'繁盛', /* omikujii.gakumon */'良し', /* omikujii.renewalwriter */'ヒヨ', /* omikujii.renewaldate */'20220711', /* omikujii.unseiwriter */'ヒヨ', /* omikujii.unseiwritedate */'20220711')

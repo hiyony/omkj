@@ -14,14 +14,18 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.omkj.entity.Fortunemaster;
 import com.omkj.entity.Omikujii;
+import com.omkj.entity.OmikujiiSave;
 import com.omkj.entity.Unseiresult;
-import com.omkj.repository.FortunemasterDao;
-import com.omkj.repository.OmikujiiDao;
-import com.omkj.repository.UnseiresultDao;
+import com.omkj.entity.dto.OmikujiiDto;
+import com.omkj.repository.dao.FortunemasterDao;
+import com.omkj.repository.dao.OmikujiiDao;
+import com.omkj.repository.dao.UnseiresultDao;
 import com.omkj.service.FortunemasterService;
 import com.omkj.service.OmikujiiService;
 import com.omkj.service.UnseiresultService;
@@ -46,7 +50,7 @@ public class OutputController {
 	private static final String path="/omkj/csvomkj.csv";
 
 	@PostMapping("/output/")
-	public String output() throws IOException {
+	public String output(@RequestParam Model model) throws IOException {
 		
 		String birthday = request.getParameter("birthday");
 		
@@ -131,11 +135,34 @@ public class OutputController {
 			omikujiID = String.valueOf(rannum);
 		}
 		
-		List<Omikujii> omkjgetcode = omikujiiService.getresultSQLfromOmikujii(omikujiID);
+		List<OmikujiiSave> omkjgetcode = omikujiiService.getresultSQLfromOmikujii(omikujiID);
 		
 		Unseiresult result = new Unseiresult();
+		result.uranaidate = todayString;
+		result.birthday = birthday;
+		result.omikujicode = omikujiID;
+		result.renewalwriter = "ヒヨン";
+		result.renewaldate = todayString;
 		
+		unseiresultDao.insertResult(result);
 		
+		OmikujiiDto omikujiiDto = new OmikujiiDto();
+		for(OmikujiiSave omikujiiSave : omkjgetcode) {
+			omikujiiDto.setOmikuji(omikujiiSave.getUnseiname());
+			omikujiiDto.setNegaigoto(omikujiiSave.getNegaigoto());
+			omikujiiDto.setAkinai(omikujiiSave.getAkinai());
+			omikujiiDto.setGakumon(omikujiiSave.getGakumon());
+		}
+		
+		String omkj = omikujiiDto.getOmikuji();
+		String negaigoto = omikujiiDto.getNegaigoto();
+		String akinai = omikujiiDto.getAkinai();
+		String gakumon = omikujiiDto.getGakumon();
+		
+		model.addAttribute("omkj", omkj);
+		model.addAttribute("negaigoto", negaigoto);
+		model.addAttribute("akinai", akinai);
+		model.addAttribute("gakumon", gakumon);
 		
 		return "/output/output";
 	}

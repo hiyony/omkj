@@ -1,0 +1,2 @@
+INSERT INTO fortunemaster(unseiname, unseicode, renewalwriter, renewaldate, unseiwriter, unseiwritedate) 
+VALUES (/* fortunemaster.unseiname */'大吉', /* fortunemaster.unseicode */'1', /* fortunemaster.renewalwriter */'ヒヨ', /* fortunemaster.renewaldate */'20220711', /* fortunemaster.unseiwriter */'ヒヨ', /* fortunemaster.unseiwritedate */'20220711')

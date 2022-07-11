@@ -1,2 +1,0 @@
-INSERT INTO omikujii(omikujicode, unseicode, negaigoto, akinai, gakumon, renewalwriter, renewalwritedate, unseiwriter, unseiwritedate) 
-VALUES (/* omikujicode */, /* unseicode */, /* negaigoto */, /* akinai */, /* gakumon */, /* renewalwriter */, /* renewalwritedate */, /* unseiwriter */, /* unseiwritedate */);

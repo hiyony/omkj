@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.omkj.entity.Omikujii;
+import com.omkj.entity.OmikujiiSave;
 import com.omkj.service.OmikujiiService;
 
 @Controller
@@ -18,12 +18,12 @@ public class OmikujiiController {
 	OmikujiiService omikujiiService;
 	
 	@RequestMapping(value="/1")
-	public Long countSQLfromOmikujii() {
+	public int countSQLfromOmikujii() {
 		return omikujiiService.countSQLfromOmikujii();
 	}
 	
 	@RequestMapping(value="/2")
-	public List<Omikujii> getresultSQLfromOmikujii(String omikujiID){
+	public List<OmikujiiSave> getresultSQLfromOmikujii(String omikujiID){
 		return omikujiiService.getresultSQLfromOmikujii(omikujiID);
 	}
 }

@@ -1,0 +1,14 @@
+## port number setting ##
+server:
+  port: 8765
+## DB setting ##
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/omikuji
+    username: root
+    password: 1005
+    driverClassName: org.postgresql.Driver
+## doma setting ##
+doma:
+  dialect: postgres
+  sql-file-repository: NO_CACHE

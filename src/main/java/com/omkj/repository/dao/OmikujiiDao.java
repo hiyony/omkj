@@ -1,15 +1,16 @@
-package com.omkj.repository;
+package com.omkj.repository.dao;
 
 import java.util.List;
 
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
-import org.seasar.doma.boot.ConfigAutowireable;
 
 import com.omkj.entity.Omikujii;
+import com.omkj.entity.OmikujiiSave;
+import com.omkj.repository.DomaRepository;
 
-@ConfigAutowireable
+@DomaRepository
 @Dao
 public interface OmikujiiDao {
 
@@ -17,7 +18,7 @@ public interface OmikujiiDao {
 	int countSQLfromOmikujii();
 	
 	@Select
-	List<Omikujii> getresultSQLfromOmikujii(String omikujiID);
+	List<OmikujiiSave> getresultSQLfromOmikujii(String omikujiID);
 	
 	@Insert(sqlFile = true)
 	int insertOmikuji(Omikujii omikujii);

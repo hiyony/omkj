@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 public class InputForm {
 	
 	@NotNull
-	@Size(min=8, max=8)
+	@Size(min=8, max=8, message="必須項目です！yyyyMMddの形式で入力してください。")
 	private String birthday;
 
 	public String getBirthday() {
