@@ -2,18 +2,23 @@ package com.omkj.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.omkj.dao.UnseiresultDao;
 import com.omkj.entity.Unseiresult;
-import com.omkj.repository.dao.UnseiresultDao;
 
-@Service
+@Component
 public class UnseiresultServiceImpl implements UnseiresultService{
 
-	
-	UnseiresultDao unseiresultDao;
+	@Autowired
+	private UnseiresultDao unseiresultDao;
 	
 	public List<Unseiresult> getcompareSQLfromUnseiresult(String todayString, String birthday){
 		return unseiresultDao.getcompareSQLfromUnseiresult(todayString, birthday);
+	}
+	
+	public List<Unseiresult> gethalfyearSQLfromUnseiresult(String checkdate, String birthday){
+		return unseiresultDao.gethalfyearSQLfromUnseiresult(checkdate, birthday);
 	}
 }

@@ -12,54 +12,61 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.omkj.dao.FortunemasterDao;
+import com.omkj.dao.OmikujiiDao;
+import com.omkj.dao.UnseiresultDao;
 import com.omkj.entity.Fortunemaster;
 import com.omkj.entity.Omikujii;
 import com.omkj.entity.OmikujiiSave;
 import com.omkj.entity.Unseiresult;
 import com.omkj.entity.dto.OmikujiiDto;
-import com.omkj.repository.dao.FortunemasterDao;
-import com.omkj.repository.dao.OmikujiiDao;
-import com.omkj.repository.dao.UnseiresultDao;
-import com.omkj.service.FortunemasterService;
-import com.omkj.service.OmikujiiService;
-import com.omkj.service.UnseiresultService;
+import com.omkj.service.FortunemasterServiceImpl;
+import com.omkj.service.OmikujiiServiceImpl;
+import com.omkj.service.UnseiresultServiceImpl;
 
 @Controller
 public class OutputController {
 	
-	protected FortunemasterService fortunemasterService;
+	@Autowired
+	FortunemasterServiceImpl fortunemasterServiceImpl;
 	
-	protected OmikujiiService omikujiiService;
+	@Autowired
+	OmikujiiServiceImpl omikujiiServiceImpl;
 	
-	protected UnseiresultService unseiresultService;
+	@Autowired
+	UnseiresultServiceImpl unseiresultServiceImpl;
 	
-	protected FortunemasterDao fortunemasterDao;
+	@Autowired
+	FortunemasterDao fortunemasterDao;
 	
-	protected OmikujiiDao omikujiiDao;
+	@Autowired
+	OmikujiiDao omikujiiDao;
 	
-	protected UnseiresultDao unseiresultDao;
-	
-	protected HttpServletRequest request;
-	
+	@Autowired
+	UnseiresultDao unseiresultDao;
+
 	private static final String path="/omkj/csvomkj.csv";
 
-	@PostMapping("/output/")
-	public String output(@RequestParam Model model) throws IOException {
+	@RequestMapping(value="/output", method=RequestMethod.GET)
+	public String output(Model model, HttpServletRequest request) throws IOException {
 		
-		String birthday = request.getParameter("birthday");
+		HttpSession session = request.getSession();
+		String birthday = (String) session.getAttribute("bday");
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		Calendar today = Calendar.getInstance();
 		String todayString = df.format(today.getTime());
 		
 		BufferedReader br = null;
-		List<Fortunemaster> fortuneList = fortunemasterService.getSelectSQLfromFortunemaster();
+		List<Fortunemaster> fortuneList = fortunemasterServiceImpl.getSelectSQLfromFortunemaster();
 		
 		Map<String, String> unseiMap = new HashMap<String, String>();
 		Iterator<Fortunemaster> iterator = fortuneList.iterator();
@@ -94,7 +101,7 @@ public class OutputController {
 			}
 		}	
 		
-		int cnt = omikujiiService.countSQLfromOmikujii();
+		int cnt = omikujiiServiceImpl.countSQLfromOmikujii();
 		
 		if(cnt == 0) {
 			String line;
@@ -121,7 +128,7 @@ public class OutputController {
 			}
 		}
 		
-		List<Unseiresult> omkjid = unseiresultService.getcompareSQLfromUnseiresult(todayString, birthday);
+		List<Unseiresult> omkjid = unseiresultServiceImpl.getcompareSQLfromUnseiresult(todayString, birthday);
 		Iterator<Unseiresult> it = omkjid.iterator();
 		String omikujiID = null;
 		
@@ -135,7 +142,7 @@ public class OutputController {
 			omikujiID = String.valueOf(rannum);
 		}
 		
-		List<OmikujiiSave> omkjgetcode = omikujiiService.getresultSQLfromOmikujii(omikujiID);
+		List<OmikujiiSave> omkjgetcode = omikujiiServiceImpl.getresultSQLfromOmikujii(omikujiID);
 		
 		Unseiresult result = new Unseiresult();
 		result.uranaidate = todayString;
@@ -143,6 +150,8 @@ public class OutputController {
 		result.omikujicode = omikujiID;
 		result.renewalwriter = "ヒヨン";
 		result.renewaldate = todayString;
+		result.unseiwriter = "ヒヨン";
+		result.unseiwritedate = todayString;
 		
 		unseiresultDao.insertResult(result);
 		
@@ -159,11 +168,12 @@ public class OutputController {
 		String akinai = omikujiiDto.getAkinai();
 		String gakumon = omikujiiDto.getGakumon();
 		
+		model.addAttribute("birthday", birthday);
 		model.addAttribute("omkj", omkj);
 		model.addAttribute("negaigoto", negaigoto);
 		model.addAttribute("akinai", akinai);
 		model.addAttribute("gakumon", gakumon);
 		
-		return "/output/output";
+		return "output/output";
 	}
 }

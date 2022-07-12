@@ -1,5 +1,8 @@
 package com.omkj.entity.dto;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class OmikujiiDto {
 
 	private String omikuji;

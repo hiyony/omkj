@@ -20,4 +20,9 @@ public class UnseiresultController {
 	public List<Unseiresult> getcompareSQLfromUnseiresult(String todayString, String birthday){
 		return unseiresultService.getcompareSQLfromUnseiresult(todayString, birthday);
 	}
+	
+	@RequestMapping(value="halfresult", method=RequestMethod.GET)
+	public List<Unseiresult> gethalfyearSQLfromUnseiresult(String checkdate, String birthday){
+		return unseiresultService.gethalfyearSQLfromUnseiresult(checkdate, birthday);
+	}
 }

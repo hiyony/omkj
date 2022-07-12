@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Omikuji Web Service</title>
+</head>
+<body>
+	<h1>Omikuji Web Service</h1>
+	<h4 th:text="'半年前から今までの結果リスト'"></h4><br>
+	<input type="button" value="戻る" onclick="location.href='/'"/><br><br>
+	<table border="1">
+		<tr>
+			<th>占い日</th>
+			<th>誕生日</th>
+			<th>おみくじのコード</th>
+			<th>リニューアルの作成者</th>
+			<th>リニューアルの日</th>
+			<th>運勢の作成者</th>
+			<th>運勢の作成日</th>
+		</tr>
+		<tr th:each="half : ${list}">
+			<td th:text="${half.uranaidate}"></td>
+			<td th:text="${half.birthday}"></td>
+			<td th:text="${half.omikujicode}"></td>
+			<td th:text="${half.renewalwriter}"></td>
+			<td th:text="${half.renewaldate}"></td>
+			<td th:text="${half.unseiwriter}"></td>
+			<td th:text="${half.unseiwritedate}"></td>
+		</tr>
+	</table>
+</body>
+</html>

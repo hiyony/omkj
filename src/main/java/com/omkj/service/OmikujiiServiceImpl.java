@@ -2,16 +2,17 @@ package com.omkj.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.omkj.dao.OmikujiiDao;
 import com.omkj.entity.OmikujiiSave;
-import com.omkj.repository.dao.OmikujiiDao;
 
-@Service
+@Component
 public class OmikujiiServiceImpl implements OmikujiiService{
 
-	
-	OmikujiiDao omikujiiDao;
+	@Autowired
+	private OmikujiiDao omikujiiDao;
 	
 	public int countSQLfromOmikujii() {
 		return omikujiiDao.countSQLfromOmikujii();

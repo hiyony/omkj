@@ -1,4 +1,4 @@
-package com.omkj.repository;
+package com.omkj.dao.repository;
 
 import org.seasar.doma.AnnotateWith;
 import org.seasar.doma.Annotation;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 	    // 生成されたDAO実装クラスのコンストラクタに@Autowired
 	    @Annotation(target = AnnotationTarget.CONSTRUCTOR, type = Autowired.class)
 	})
+
 public @interface DomaRepository {
 
 }

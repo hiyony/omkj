@@ -18,6 +18,7 @@ public class OmikujiiSave {
 	@Column(name = "gakumon")
 	private String gakumon;
 	
+
 	public String getUnseiname() {
 		return unseiname;
 	}

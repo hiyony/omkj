@@ -6,10 +6,10 @@
 </head>
 <body>
 	<h1>今日の運勢はどうですか？</h1>
-	<span th:text = "'誕生日は' + ${inputForm.birthday} + 'です。'"></span>
+	<span th:text = "'誕生日は' + ${birthday} + 'です。'"></span>
 	<span th:text = "'今日の運勢は「' + ${omkj} + '」です。'"></span>
 	<hr>
-	<div id = "list">
+	<div>
 		<span th:text = "'願い事　:　' + ${negaigoto}"></span><br>
 		<span th:text = "'商い　:　' + ${akinai}"></span><br>
 		<span th:text = "'学問　:　' + ${gakumon}"></span>

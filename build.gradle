@@ -9,6 +9,10 @@ group = 'com.omkj'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+configurations {
+	domaGenRuntime
+}
+
 repositories {
 	mavenCentral()
 	maven{url 'https://oss.sonatype.org/content/repositories/snapshots'}
@@ -38,12 +42,30 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.1'
 	
 	//Domaのインストール
+	// https://mvnrepository.com/artifact/org.seasar.doma/doma
+	implementation 'org.seasar.doma:doma:2.29.0'
 	implementation 'org.seasar.doma.boot:doma-spring-boot-starter:1.4.0'
 	annotationProcessor 'org.seasar.doma:doma-processor:2.35.0'
 	// https://mvnrepository.com/artifact/org.seasar.doma/doma-core
 	runtimeOnly 'org.seasar.doma:doma-core:2.35.0'
 	// https://mvnrepository.com/artifact/org.seasar.doma/doma-processor
 	implementation 'org.seasar.doma:doma-processor:2.51.1'
+	
+	domaGenRuntime 'org.seasar.doma:doma-gen:2.6.1'
+	domaGenRuntime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+}
+
+task gen{
+	group = 'doma-gen'
+	doLast{
+		ant.taskdef(resource: 'domagentask.properties',
+			classpath: configurations.domaGenRuntime.asPath)
+		ant.gen(url: 'jdbc:postgresql://localhost:5432/omikuji', user: 'root', password: '1005'){
+			entityConfig()
+			daoConfig()
+			sqlConfig()
+		}
+	}
 }
 
 tasks.named('test') {

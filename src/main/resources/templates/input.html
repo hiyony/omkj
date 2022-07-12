@@ -10,18 +10,14 @@
 	<form th:object="${inputForm}" method="POST">
 		<span>お誕生日を入力してください！</span>
 		<input type = "text" id = "birthday" name = "birthday" th:field = "*{birthday}" placeholder = "yyyyMMddの形式"/>
-		<!-- <ul th:if="${#fields.hasErrors('birthday')}">
-			<li th:each = "e : ${#fields.detailedErrors('birthday')}" th:text="${e.message}" style = "color:red;"></li>
-		</ul> -->
 		<input type = "submit" name = "btn" value = "確認" th:action="@{/}"><br>
-		<!-- <ul th:if="${validationError}" th:each="error:${validationError}">
-			<li th:text="${error}" style="color:red"></li>
-		</ul> -->
 		<div th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" style="color:red"></div>
 		<br><br>
 		上にお誕生日を入力してクリックしてください！<br>
-		<input type = "submit" name = "btn" value = "過去半年の結果リスト">
-		<input type = "submit" name = "btn" value = "過去結果のおみくじ割合">
+		<input type = "submit" name = "btn" value = "過去半年の結果リスト"
+			   formaction = "/half">
+		<input type = "submit" name = "btn" value = "過去結果のおみくじ割合"
+			   formaction = "/percent">
 	</form>
 </body>
 </html>

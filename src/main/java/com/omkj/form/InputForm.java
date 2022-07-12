@@ -4,7 +4,6 @@ package com.omkj.form;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 public class InputForm {
 	
 	@NotNull
