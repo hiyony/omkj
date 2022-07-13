@@ -3,6 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <title>Omikuji Web Service</title>
+<style>
+	body{
+		text-align: center;
+	}
+		#sendform {
+		display : relative;
+		justify-content: center;
+	}
+	#msg {
+		color : red;
+	}
+	label{
+		display: block;
+		margin: 20px 0px;
+	}
+	.modal{
+		width: 80%;
+		height: 80%;
+		padding: 20px;
+		background: #fff;
+		display: none;
+	}
+	.modal-content{
+		height: 80%;
+		padding: 20px 10px;
+		overflow: hidden;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+	.overlay{
+		display: none;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+	.overlay.is-show{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+</style>
+<script src = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<h1>今日の運勢はどうですか？</h1>
@@ -17,5 +65,74 @@
 	<br><input type="button"
 			   value="戻る" 
 			   onclick="location.href = '/'"/>
+	<br><br>
+	<hr><br>
+	<h1>結果を送る！あなたの情報を入力してください！</h1>
+	<form>
+		<div id="sendform">
+			名前 <input type=text name="name" /><br>
+			郵便番号 〒<input type=text name="postnumber" id="zipcode"
+							onchange="checkNum();getHomeaddress()" /><br>
+			住所 <input type=text name="homeaddress" class="js-modalinput" id="homeaddress"
+						data-madal="address" onchange="checkmorethan3();getZipcode()"/><br>
+			メールアドレス <input type=text name="emailaddress" /><br><br>
+			
+			<!-- modal area -->
+			<div id="js-overlay" class="overlay">
+				<div id="modal" class="js-modal modal"></div>
+			</div>
+			
+			<input type="submit" name="submitbtn" value="保存する"
+					formaction="" formmethod="POST"/>
+		</div>
+	</form>
+	
+	<script type="text/javascript">
+	
+	function checkNum(){
+		var zipcode=document.getElementById("zipcode").value;
+		if(zipcode.length != 7){
+			alert('7文字の郵便番号を入力してください！');
+			document.querySelector('#zipcode').value='';
+		}
+	}
+	
+	function getHomeaddress(){
+		var zipcode=document.getElementById("zipcode").value;
+		$.ajax({
+			url: "http://localhost:8765/getaddress",
+			type: "POST",
+			data: { zcode : zipcode }
+		}).done(function(homeaddress){
+			$("#homeaddress").val(homeaddress);
+		}).fail(function(){
+			console.log("fail");
+		}).always(function(){
+			console.log("pass");
+		});
+	}
+	
+	function checkmorethan3(){
+		var address = document.getElementById("homeaddress").value;
+		if(address.length<3){
+			alert('3文字以上で書いてください！');
+			document.querySelector('#homeaddress').value='';
+		}
+	}
+	
+	function getZipcode(){
+		var address = document.getElementById("homeaddress").value;
+		var zipcode = "";
+		$.ajax({
+			
+		})
+	}
+	
+	</script>
+	
+	
+	
+	
+	
 </body>
 </html>

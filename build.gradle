@@ -41,6 +41,9 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.1'
 	
+	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	implementation 'com.googlecode.json-simple:json-simple:1.1'
+	
 	//Domaのインストール
 	// https://mvnrepository.com/artifact/org.seasar.doma/doma
 	implementation 'org.seasar.doma:doma:2.29.0'
@@ -53,6 +56,7 @@ dependencies {
 	
 	domaGenRuntime 'org.seasar.doma:doma-gen:2.6.1'
 	domaGenRuntime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+	
 }
 
 task gen{

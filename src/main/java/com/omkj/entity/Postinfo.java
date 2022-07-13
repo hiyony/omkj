@@ -12,23 +12,23 @@ public class Postinfo {
 
     /** */
     @Column(name = "zipcode")
-    String zipcode;
+    public String zipcode;
 
     /** */
     @Column(name = "homeaddress1")
-    String homeaddress1;
+    public String homeaddress1;
 
     /** */
     @Column(name = "homeaddress2")
-    String homeaddress2;
+    public String homeaddress2;
 
     /** */
     @Column(name = "homeaddress3")
-    String homeaddress3;
+    public String homeaddress3;
 
     /** */
     @Column(name = "homeaddress")
-    String homeaddress;
+    public String homeaddress;
 
     /** 
      * Returns the zipcode.

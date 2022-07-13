@@ -11,6 +11,7 @@ import org.seasar.doma.Update;
 import com.omkj.dao.repository.DomaRepository;
 import com.omkj.entity.Omikujii;
 import com.omkj.entity.OmikujiiSave;
+import com.omkj.entity.PercentSave;
 
 /**
  */
@@ -23,6 +24,9 @@ public interface OmikujiiDao {
 	
 	@Select
 	List<OmikujiiSave> getresultSQLfromOmikujii(String omikujiID);
+	
+	@Select
+	List<PercentSave> getPercentResultList(String birthday);
 	
 	@Insert(sqlFile = true)
 	int insertOmikuji(Omikujii omikujii);

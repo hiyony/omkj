@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Omikuji Web Service</title>
 </head>
 <body>
-
+	<h1>Omikuji Web Service</h1>
+	<h4 th:text="'おみくじの割合結果リスト'"></h4><br>
+	<input type="button" value="戻る" onclick="location.href='/'"/><br><br>
+	<table border="1">
+		<tr>
+			<th>運勢名</th>
+			<th>運勢数</th>
+			<th>割合</th>
+		</tr>
+		<tr th:each="percent : ${list}">
+			<td th:text="${percent.fortunename}"></td>
+			<td th:text="${percent.fortunecount}"></td>
+			<td th:text="${percent.totalpercent}"></td>
+		</tr>
+	</table>
 </body>
 </html>

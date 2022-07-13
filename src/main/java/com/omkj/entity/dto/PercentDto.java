@@ -8,6 +8,7 @@ public class PercentDto {
 	private Integer fortunecount;
 	private Integer totalpercent;
 	private String fortunename;
+	private String fortunecode;
 	
 	public Integer getFortunecount() {
 		return fortunecount;
@@ -26,6 +27,12 @@ public class PercentDto {
 	}
 	public void setFortunename(String fortunename) {
 		this.fortunename = fortunename;
+	}
+	public String getFortunecode() {
+		return fortunecode;
+	}
+	public void setFortunecode(String fortunecode) {
+		this.fortunecode = fortunecode;
 	}
 	
 	

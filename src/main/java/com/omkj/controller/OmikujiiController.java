@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.omkj.entity.OmikujiiSave;
+import com.omkj.entity.PercentSave;
 import com.omkj.service.OmikujiiService;
 
 @Controller
@@ -25,5 +26,10 @@ public class OmikujiiController {
 	@RequestMapping(value="/2")
 	public List<OmikujiiSave> getresultSQLfromOmikujii(String omikujiID){
 		return omikujiiService.getresultSQLfromOmikujii(omikujiID);
+	}
+	
+	@RequestMapping(value="/3")
+	public List<PercentSave> getPercentResultList(String birthday){
+		return omikujiiService.getPercentResultList(birthday);
 	}
 }

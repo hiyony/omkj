@@ -1,16 +1,24 @@
 package com.omkj.dao;
 
+import java.util.List;
+
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
+import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 
+import com.omkj.dao.repository.DomaRepository;
 import com.omkj.entity.Postinfo;
 
 /**
  */
+@DomaRepository
 @Dao
 public interface PostinfoDao {
+	
+	@Select
+	List<Postinfo> getresultSQLfromPinfo(String zcode);
 
     /**
      * @param entity
