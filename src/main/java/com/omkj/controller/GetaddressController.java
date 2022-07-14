@@ -18,12 +18,27 @@ import com.omkj.entity.Postinfo;
 import com.omkj.entity.dto.GetaddressDto;
 import com.omkj.service.PostinfoServiceImpl;
 
+/**
+ * 郵便番号から住所取得コントローラークラスです。
+ * 
+ * @author h_kim
+ * @version 1.0
+ */
 @RestController
 public class GetaddressController {
 	
+	/** サービス処理クラス */
 	@Autowired
 	PostinfoServiceImpl postinfoServiceImpl;
 	
+	/**
+	 * 郵便番号から住所を検索し住所を取得する。
+	 * 入力パラメーターはrequestから取得する。
+	 * @param request リクエスト
+	 * @param response リスポンス
+	 * @return null
+	 * @throws IOException
+	 */
 	@RequestMapping(value="/getaddress", method=RequestMethod.POST)
 	@ResponseBody
 	public String getaddress(HttpServletRequest request, HttpServletResponse response) throws IOException{

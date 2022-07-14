@@ -12,30 +12,49 @@ import com.omkj.dao.repository.DomaRepository;
 import com.omkj.entity.Postinfo;
 
 /**
+ * {@link Postinfo}のDaoインタフェースです。
+ * 
+ * @author h_kim
+ * @version 1.0
  */
+
 @DomaRepository
 @Dao
 public interface PostinfoDao {
 	
+	/**
+	 * SQL文を呼び出す
+	 * @param zcode 郵便番号
+	 * @return SQL文の結果
+	 */
 	@Select
 	List<Postinfo> getresultSQLfromPinfo(String zcode);
+	
+	/**
+	 * SQL文を呼び出す
+	 * @param homeaddress 住所
+	 * @param replaceaddress 区別された住所
+	 * @return SQL文の結果
+	 */
+	@Select
+	List<Postinfo> getzipcodeSQLfromPinfo(String homeaddress, String replaceaddress);
 
     /**
-     * @param entity
+     * @param entity エンティティ
      * @return affected rows
      */
     @Insert
     int insert(Postinfo entity);
 
     /**
-     * @param entity
+     * @param entity エンティティ
      * @return affected rows
      */
     @Update
     int update(Postinfo entity);
 
     /**
-     * @param entity
+     * @param entity エンティティ
      * @return affected rows
      */
     @Delete

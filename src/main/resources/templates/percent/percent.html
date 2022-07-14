@@ -16,8 +16,8 @@
 		</tr>
 		<tr th:each="percent : ${list}">
 			<td th:text="${percent.fortunename}"></td>
-			<td th:text="${percent.fortunecount}"></td>
-			<td th:text="${percent.totalpercent}"></td>
+			<td th:text="${percent.fortunecount}">回</td>
+			<td th:text="${percent.totalpercent}">%</td>
 		</tr>
 	</table>
 </body>

@@ -12,19 +12,19 @@ public class Save {
 
     /** */
     @Column(name = "name")
-    String name;
+    public String name;
 
     /** */
     @Column(name = "zipcode")
-    String zipcode;
+    public String zipcode;
 
     /** */
     @Column(name = "homeaddress")
-    String homeaddress;
+    public String homeaddress;
 
     /** */
     @Column(name = "emailaddress")
-    String emailaddress;
+    public String emailaddress;
 
     /** 
      * Returns the name.

@@ -19,12 +19,28 @@ import com.omkj.entity.Unseiresult;
 import com.omkj.entity.dto.HalfDto;
 import com.omkj.service.UnseiresultServiceImpl;
 
+/**
+ * 半年分の結果取得コントローラークラスです。
+ * 
+ * @author h_kim
+ * @version 1.0
+ */
 @Controller
 public class HalfController {
-	
+
+	/** サービス処理クラス */
 	@Autowired
 	UnseiresultServiceImpl unseiresultServiceImpl;
 	
+	/**
+	 * 半年前の結果から今日の結果まで検索しリストを取得する。
+	 * 入力パラメーターはrequestから取得をする (yyyyMMdd方式)
+	 * 　入力パラメーターの日付から過去半年は自動的に計算し処理する。
+	 * 
+	 * @param model モデル
+	 * @param request レクエスと
+	 * @return html画面
+	 */
 	@RequestMapping(value="/half", method=RequestMethod.POST)
 	public String half(Model model, HttpServletRequest request) {
 		

@@ -32,29 +32,55 @@ import com.omkj.service.FortunemasterServiceImpl;
 import com.omkj.service.OmikujiiServiceImpl;
 import com.omkj.service.UnseiresultServiceImpl;
 
+/**
+ * おみくじ結果取得コントローラークラス。
+ * クラス、画面からの要求を制御するコントローラークラス。
+ * おみくじデータベースから入力された誕生日のおみくじ結果を取得します。
+ * 
+ * @author h_kim
+ * @version 1.0
+ */
 @Controller
 public class OutputController {
-	
+
+	/** サービス処理クラス */
 	@Autowired
 	FortunemasterServiceImpl fortunemasterServiceImpl;
-	
+
+	/** サービス処理クラス */
 	@Autowired
 	OmikujiiServiceImpl omikujiiServiceImpl;
-	
+
+	/** サービス処理クラス */
 	@Autowired
 	UnseiresultServiceImpl unseiresultServiceImpl;
 	
+	/** Dao */
 	@Autowired
 	FortunemasterDao fortunemasterDao;
 	
+	/** Dao */
 	@Autowired
 	OmikujiiDao omikujiiDao;
 	
+	/** Dao */
 	@Autowired
 	UnseiresultDao unseiresultDao;
 
+	/** おみくじのCSVファイル */
 	private static final String path="/omkj/csvomkj.csv";
 
+	/**
+	 * 入力されたお誕生日でおみくじの結果をランダムで取得する。
+	 * 入力パラメーターはsessionから取得する(yyyyMMdd方式)
+	 * 過去の結果の中に同じ誕生日と日付の結果がある場合、これを取得する。
+	 * 新しい日付と誕生日の場合、ランダムで結果を取得する。
+	 * 
+	 * @param model モデル
+	 * @param request リクエスト
+	 * @return html画面
+	 * @throws IOException
+	 */
 	@RequestMapping(value="/output", method=RequestMethod.GET)
 	public String output(Model model, HttpServletRequest request) throws IOException {
 		

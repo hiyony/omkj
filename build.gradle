@@ -42,8 +42,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.1'
 	
 	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
-	implementation 'com.googlecode.json-simple:json-simple:1.1'
-	
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
 	//Domaのインストール
 	// https://mvnrepository.com/artifact/org.seasar.doma/doma
 	implementation 'org.seasar.doma:doma:2.29.0'

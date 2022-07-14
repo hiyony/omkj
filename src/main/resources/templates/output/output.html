@@ -83,7 +83,7 @@
 			</div>
 			
 			<input type="submit" name="submitbtn" value="保存する"
-					formaction="" formmethod="POST"/>
+					formaction="/saving" formmethod="POST"/>
 		</div>
 	</form>
 	
@@ -120,12 +120,70 @@
 		}
 	}
 	
+	function selectZip(zipcode){
+		/* if(listaddress.includes("以下に掲載がない場合")){
+			//nothing happens 
+		} else{
+			document.getElementById('homeaddress').value = listaddress;
+		} */
+		
+		console.log($("input:radio[name=zipcodeList]:checked").val());
+		document.getElementById('zipcode').value = zipcode;
+		document.getElementById('js-overlay').classList.remove('is-show');
+		document.getElementById('modal').style.display = 'none';
+	}
+	
 	function getZipcode(){
 		var address = document.getElementById("homeaddress").value;
 		var zipcode = "";
 		$.ajax({
-			
-		})
+			url: "http://localhost:8765/getzipcode",
+			type: "POST",
+			data: { address : address },
+			dataType: "json",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			statusCode:{
+				200:function(zipcodelist){
+					var count = Object.keys(zipcodelist).length;
+					if(count === 0){
+						alert('WRONG ADDRESS!');
+						document.querySelector('#homeaddress').value = '';
+						document.querySelector('#zipcode').value = '';
+					} else if(count > 1){
+						console.log('more than 1');
+						var html = '<div class = "modal-content">';
+ 						for(key in zipcodelist){
+							var listaddress = zipcodelist[key];
+							var htmlParts =  '<label><input type="radio" name="zipcodeList" value="' 
+							+ key + '" onclick="selectZip(' + key + ')" />' 
+							+ key + "　→　" + listaddress + '</label>';
+							html += htmlParts;
+						}
+ 						
+						html += '</div>';
+						document.getElementById('modal').innerHTML = html;
+						document.getElementById('js-overlay').classList.add('is-show');
+						document.getElementById('modal').style.display = 'block';
+						
+					} else{
+						console.log('wow');
+						for(key in zipcodelist){
+							if(address.includes(zipcodelist[key])){
+								zipcode = JSON.stringify(key);
+								zipcode = zipcode.replaceAll('"', '');
+								console.log(zipcode);
+							}
+						}
+						$("#zipcode").val(zipcode);
+					}
+				}
+			}
+		}).done(function(zipcodelist){
+		}).fail(function(){
+			console.log("fail");
+		}).always(function(){
+			console.log("it works");
+		});
 	}
 	
 	</script>

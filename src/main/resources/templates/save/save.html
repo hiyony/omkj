@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Omikuji Web Service</title>
+<style>
+	body{
+		text-align: center;
+	}
+	table{
+		margin-left: auto;
+		margin-right: auto;
+	}
+</style>
+</head>
+<body>
+		<h1>Omikuji Web Service</h1>
+	<h4 th:text="'保存された個人情報リスト'"></h4><br>
+	<input type="button" value="戻る" onclick="location.href='/'"/><br><br>
+	<table border="1">
+		<tr>
+			<th>名前</th>
+			<th>郵便番号</th>
+			<th>住所</th>
+			<th>メール</th>
+		</tr>
+		<tr th:each="save : ${list}">
+			<td th:text="${save.name}"></td>
+			<td th:text="${save.zipcode}"></td>
+			<td th:text="${save.homeaddress}"></td>
+			<td th:text="${save.emailaddress}"></td>
+		</tr>
+	</table>
+</body>
+</html>
