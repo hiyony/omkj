@@ -28,6 +28,7 @@ import com.omkj.service.OmikujiiServiceImpl;
  * @version 1.0
  */
 @RestController
+//@RequestMapping(value="/api", method=RequestMethod.GET)
 public class PercentController {
 
 	/** サービス処理クラス */
@@ -47,6 +48,7 @@ public class PercentController {
 	 */
 	@RequestMapping(value="/percent", method=RequestMethod.POST)
 	@ResponseBody
+	//@PostMapping("/result")
 	public List<PercentDto> percent(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		String birthday = request.getParameter("birthday");
@@ -71,6 +73,7 @@ public class PercentController {
 			list.add(percentDto);
 			
 		}
+		model.addAttribute(list);
 		
 		return list;
 	
