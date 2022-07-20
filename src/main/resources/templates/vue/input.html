@@ -17,6 +17,7 @@
 </style>
 <script src = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <body>
 	<h1>Omikuji Web Service</h1>
 	
@@ -29,14 +30,26 @@
 		上にお誕生日を入力してクリックしてください！<br>
 		<input type = "submit" name = "btn" value = "過去半年の結果リスト"
 			   formaction = "/half">
-		<input type = "button" id="btn" value = "過去結果のおみくじ割合">
-		<br>
-			<hr><br>
-			<h4>こっちにおみくじの割合リストが出力します！</h4>
-			→ ajax list 画面出力<br>
-		<!-- vueを使って -->
+		<input type = "button" id="btn" value = "過去結果のおみくじ割合"
+			   formaction = "/vue">
+		<br><br>
+			<hr>
+			<h4>統計リストが出力します！</h4>
+			→ 画面出力<br>
+		<!-- vueを使って作った割合画面出力 -->
 		<div id="app">
-			{{ getPercent() }} {{ html }}
+			<table border="1">
+			<tr>
+				<th>運勢名</th>
+				<th>運勢数</th>
+				<th>割合</th>
+			</tr>
+			<tr v-for="res in datas">
+				<td>{{ res.fortunename }}</td>
+				<td>{{ res.fortunecount }}回</td>
+				<td>{{ res.totalpercent }}%</td>
+			</tr>
+			</table>
 		</div>
 			   
 		<!--  ajaxを使って作った割合画面出力
@@ -50,42 +63,47 @@
 	</form>
 	
 	<script type="text/javascript">
+	/* vue.js */
 	var button = document.getElementById('btn');
-	
 	button.addEventListener('click', function(){
 		console.log('Click!');
 		new Vue({
 			el: '#app',
 			data: function(){
 				return {
-					html: ""
+					datas: []
 				}	
 			},
-			mounted: function(){
+ 			mounted: function(){
+				/* axios.post('http://localhost:8765/percent') 
+					.then((response) => {
+						this.htmlsources = axiosHtml(response);
+					}) */
 				this.getPercent();
 			},
 			methods: {
 				getPercent: function(){
-					console.log('is it working?');
 					var birthday = $("#birthday").val();
-					$.ajax({
-						url: "http://localhost:8765/percent",
-						type: "POST",
-						data: {birthday : birthday},
-						dataType: "json",
-						contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-						success: function(data){
-							console.log('yes!');
-							this.html = ajaxHtml(data);
-							document.getElementById('app').style.display = 'block';
+					console.log(birthday);
+					var url = 'http://localhost:8765/percent';
+					axios.get(url, {
+						params: {
+							birthday : birthday
 						}
+					}).then((response) => {
+						console.log(response);
+						this.datas = response.data;
+						document.getElementById('app').style.display = 'block';
+					}).catch((error) => {
+						console.log(error);
 					});
 				}
 			}
 		})
 	});
-
-	function ajaxHtml(data){
+	
+	/* ajax */
+	/*	function ajaxHtml(data){
 		var html="<table border='1'>";
 		html+="<tr>";
 		html+="<th>運勢名</th>";
@@ -105,7 +123,7 @@
 		$("#ajaxPercentageList").html(html);
 	}
 	
-	/* ajax */
+	*/
 	/*	function getPercent(){
 			var birthday = $("#birthday").val();
 			$.ajax({
@@ -117,6 +135,7 @@
 				success: ajaxHtml
 			});
 		} */
+		
 	</script>
 </body>
 </html>

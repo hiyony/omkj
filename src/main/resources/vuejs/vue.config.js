@@ -4,25 +4,30 @@ const path = require("path");
 
 module.exports = {
 	devServer: {
-		proxy: 'http://localhost:8765'
+		proxy: {
+			'/api': {
+				target: 'http://localhost:8765',
+				changeOrigin: true
+			}
+		}
 	},
 	indexPath: '../../templates/vue/input.html',
 	publicPath: '/vue',
 	outputDir: path.resolve(__dirname, "../src/main/resources/static/vue")
 }
-//defineConfig({
+/*defineConfig({
 	
 	//ビルドターゲットのディレクトリ
-	//outputDir: "../src/main/resources/static",
-	//devServer: {
-	//	proxy: {
+	outputDir: "../src/main/resources/static",
+	devServer: {
+		proxy: {
 			//'/api'に入ったらスプリングのサーバーに送する
-	//		'/api': {
-	//			target: 'http://localhost:8765',
-	//			changeOrigin: true, //cross origin 許可
-	//			exposedHeaders: ['Content-Disposition']
-	//		}
-	//	}
-	//},
-	//transpileDependencies: true
-//});
+			'/api': {
+				target: 'http://localhost:8765',
+				changeOrigin: true, //cross origin 許可
+				exposedHeaders: ['Content-Disposition']
+			}
+		}
+	},
+	transpileDependencies: true
+});*/

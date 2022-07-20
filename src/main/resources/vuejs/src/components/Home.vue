@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="@/assets/logo.png">
     <p>
     <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'home',
+  name: 'HomePage'
 }
 </script>
 

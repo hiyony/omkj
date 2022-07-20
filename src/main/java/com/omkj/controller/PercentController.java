@@ -28,7 +28,7 @@ import com.omkj.service.OmikujiiServiceImpl;
  * @version 1.0
  */
 @RestController
-//@RequestMapping(value="/api", method=RequestMethod.GET)
+//@RequestMapping(value="/vue", method=RequestMethod.GET)
 public class PercentController {
 
 	/** サービス処理クラス */
@@ -46,9 +46,9 @@ public class PercentController {
 	 * @return 結果リスト
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/percent", method=RequestMethod.POST)
+	@RequestMapping(value="/percent", method=RequestMethod.GET)
 	@ResponseBody
-	//@PostMapping("/result")
+	//@PostMapping("/percent")
 	public List<PercentDto> percent(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		String birthday = request.getParameter("birthday");

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-	name: 'percentresult'
+	name: 'PercentResult'
 }
 </script>
 

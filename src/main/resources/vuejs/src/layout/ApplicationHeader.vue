@@ -1,8 +1,6 @@
 <template>
 	<div class="header">
-		<h1>Header</h1>
-		<router-link to="/home">Home</router-link> / 
-		<router-link to="/getpercent/result">Percent</router-link>
+		<h1>Omikuji Web Service</h1>
 	</div>
 </template>
 
