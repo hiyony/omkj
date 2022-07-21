@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org" lang = "ja">
+<head>
+<meta charset="UTF-8">
+<title>Omikuji Web Service</title>
+<style>
+	body{
+		text-align: center;
+	}
+	table{
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#app{
+		display: none;
+	}
+</style>
+<script src = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<body>
+	<h1>Omikuji Web Service</h1>
+	
+	<form th:object="${inputForm}" method="POST">
+		<span>お誕生日を入力してください！</span>
+		<input type = "text" id = "birthday" name = "birthday" th:field = "*{birthday}" placeholder = "yyyyMMddの形式"/>
+		<input type = "submit" name = "btn" value = "確認" th:action="@{/}"><br>
+		<div th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" style="color:red"></div>
+		<br><br>
+		上にお誕生日を入力してクリックしてください！<br>
+		<input type = "submit" name = "btn" value = "過去半年の結果リスト"
+			   formaction = "/half">
+		<input type = "button" id="perbtn" value = "過去結果のおみくじ割合">
+		<br><br>
+		
+	<!-- vueを使って作った割合画面出力 -->
+	<!--<hr>
+		<h4>統計リストが出力します！</h4>
+		→ 画面出力<br> 
+		<div id="app">
+			<table border="1">
+			<tr>
+				<th>運勢名</th>
+				<th>運勢数</th>
+				<th>割合</th>
+			</tr>
+			<tr v-for="res in datas">
+				<td>{{ res.fortunename }}</td>
+				<td>{{ res.fortunecount }}回</td>
+				<td>{{ res.totalpercent }}%</td>
+			</tr>
+			</table>
+		</div> -->
+			   
+		<!--  ajaxを使って作った割合画面出力
+		<input type = "button" id = "percent" name = "btn" value = "過去結果のおみくじ割合" onclick="getPercent()">
+		<br>
+		<hr><br>
+		<h4>こっちにおみくじの割合リストが出力します！</h4>
+		ajax list 画面出力
+		<div id="ajaxPercentageList"></div> -->
+		
+	</form>
+	
+	<script type="text/javascript">
+	
+	var button = document.getElementById('perbtn');
+	button.addEventListener('click', function(){
+		console.log('Clicked');
+		new Vue({
+			methods: {
+				getPercentVue: function(){
+					console.log('is it working?');
+					var birthday = $("#birthday").val();
+					console.log(birthday);
+					this.$router.push('/vue/percent');
+					this.$router.push({name: 'Param', params: { birthday:birthday }});
+				}
+			}
+		})
+	})
+	
+	/* vue.js */
+	/* var button = document.getElementById('btn');
+	button.addEventListener('click', function(){
+		console.log('Click!');
+		new Vue({
+			el: '#app',
+			data: function(){
+				return {
+					datas: []
+				}	
+			},
+ 			mounted: function(){
+				this.getPercent();
+			},
+			methods: {
+				getPercent: function(){
+					var birthday = $("#birthday").val();
+					console.log(birthday);
+					var url = 'http://localhost:8765/percent';
+					axios.get(url, {
+						params: {
+							birthday : birthday
+						}
+					}).then((response) => {
+						console.log(response);
+						this.datas = response.data;
+						document.getElementById('app').style.display = 'block';
+					}).catch((error) => {
+						console.log(error);
+					});
+				}
+			}
+		})
+	}); */
+	
+	/* ajax */
+	/*	function ajaxHtml(data){
+		var html="<table border='1'>";
+		html+="<tr>";
+		html+="<th>運勢名</th>";
+		html+="<th>運勢数</th>";
+		html+="<th>割合</th>";
+		html+="</tr>";
+		
+		$.each(data, (index, obj)=>{
+			html+="<tr>";
+			html+="<td>"+ obj.fortunename +"</td>";
+			html+="<td>"+ obj.fortunecount +"回</td>";
+			html+="<td>"+ obj.totalpercent +"%</td>";
+			html+="</tr>";
+		})
+		html+="</table>";
+		
+		$("#ajaxPercentageList").html(html);
+	}
+	
+	*/
+	/*	function getPercent(){
+			var birthday = $("#birthday").val();
+			$.ajax({
+				url: "http://localhost:8765/percent",
+				type: "POST",
+				data: {birthday : birthday},
+				dataType: "json",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				success: ajaxHtml
+			});
+		} */
+		
+	</script>
+</body>
+</html>

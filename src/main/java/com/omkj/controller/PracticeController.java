@@ -1,15 +1,16 @@
 package com.omkj.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api")
+import lombok.AllArgsConstructor;
+
+@Controller
+@AllArgsConstructor
 public class PracticeController {
 	
-	@GetMapping("/hello")
+	@GetMapping("/vue")
 	public String helloWorld() {
-		return "hello!";
+		return "vue/index";
 	}
 }

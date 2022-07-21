@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +29,7 @@ import com.omkj.service.OmikujiiServiceImpl;
  * @version 1.0
  */
 @RestController
-//@RequestMapping(value="/vue", method=RequestMethod.GET)
+@RequestMapping(value="/vue/percent", method=RequestMethod.POST)
 public class PercentController {
 
 	/** サービス処理クラス */
@@ -46,9 +47,9 @@ public class PercentController {
 	 * @return 結果リスト
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/percent", method=RequestMethod.GET)
+	//@RequestMapping(value="/percent", method=RequestMethod.GET)
 	@ResponseBody
-	//@PostMapping("/percent")
+	@PostMapping("/view")
 	public List<PercentDto> percent(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		String birthday = request.getParameter("birthday");

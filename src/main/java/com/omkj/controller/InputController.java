@@ -36,7 +36,7 @@ public class InputController{
 		if(!model.containsAttribute("inputForm")) {
 			model.addAttribute("inputForm", new InputForm());
 		}
-		return "vue/input";
+		return "input";
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class InputController{
 		if(bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.inputForm", bindingResult);
 			redirectAttributes.addFlashAttribute("inputForm", inputForm);
-			return "vue/input";
+			return "input";
 		}
 
 		HttpSession session = request.getSession();
